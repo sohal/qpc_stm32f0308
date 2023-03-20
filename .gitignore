@@ -1,0 +1,7 @@
+[bB]uild
+[dD]ebug
+[rR]elease
+.vs
+.vscode
+.settings
+*.launch
