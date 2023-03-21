@@ -60,7 +60,7 @@ target_link_options(
     "$<$<CONFIG:Debug>:-mcpu=cortex-m0>"
     "$<$<NOT:$<CONFIG:Debug>>:-mcpu=cortex-m0>"
     -T
-    "$<$<CONFIG:Debug>:${PROJECT_SOURCE_DIR}/STM32F030R8TX_FLASH.ld>"
+    "$<$<CONFIG:Debug>:${PROJECT_SOURCE_DIR}/__linker/gcc_arm.ld>"
     "$<$<NOT:$<CONFIG:Debug>>:${PROJECT_SOURCE_DIR}/STM32F030R8TX_FLASH.ld>"
 )
 

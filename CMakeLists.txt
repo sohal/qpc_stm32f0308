@@ -4,6 +4,6 @@ project("stm32f0308_disco" C CXX ASM)
 
 include(cmake/st-project.cmake)
 include(cmake/lib_cmsis.cmake)
-
+include(cmake/lib_qpc.cmake)
 add_executable(${PROJECT_NAME})
 add_st_target_properties(${PROJECT_NAME})
