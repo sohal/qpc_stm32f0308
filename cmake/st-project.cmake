@@ -18,13 +18,14 @@ target_include_directories(
     "$<$<AND:$<CONFIG:Debug>,$<COMPILE_LANGUAGE:C>>:${PROJECT_SOURCE_DIR}/Core/Inc>"
     "$<$<AND:$<CONFIG:Debug>,$<COMPILE_LANGUAGE:C>>:${PROJECT_SOURCE_DIR}/Drivers/STM32F0xx_HAL_Driver/Inc>"
     "$<$<AND:$<CONFIG:Debug>,$<COMPILE_LANGUAGE:C>>:${PROJECT_SOURCE_DIR}/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy>"
+    "$<$<AND:$<CONFIG:Debug>,$<COMPILE_LANGUAGE:C>>:${cmsis_SOURCE_DIR}/Device/ARM/ARMCM0/Include>"
+    "$<$<AND:$<CONFIG:Debug>,$<COMPILE_LANGUAGE:C>>:${cmsis_SOURCE_DIR}/CMSIS/Core/Include>"
     "$<$<AND:$<CONFIG:Debug>,$<COMPILE_LANGUAGE:C>>:${PROJECT_SOURCE_DIR}/Drivers/CMSIS/Device/ST/STM32F0xx/Include>"
-    "$<$<AND:$<CONFIG:Debug>,$<COMPILE_LANGUAGE:C>>:${PROJECT_SOURCE_DIR}/Drivers/CMSIS/Include>"
     "$<$<AND:$<NOT:$<CONFIG:Debug>>,$<COMPILE_LANGUAGE:C>>:${PROJECT_SOURCE_DIR}/Core/Inc>"
     "$<$<AND:$<NOT:$<CONFIG:Debug>>,$<COMPILE_LANGUAGE:C>>:${PROJECT_SOURCE_DIR}/Drivers/STM32F0xx_HAL_Driver/Inc>"
     "$<$<AND:$<NOT:$<CONFIG:Debug>>,$<COMPILE_LANGUAGE:C>>:${PROJECT_SOURCE_DIR}/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy>"
-    "$<$<AND:$<NOT:$<CONFIG:Debug>>,$<COMPILE_LANGUAGE:C>>:${PROJECT_SOURCE_DIR}/Drivers/CMSIS/Device/ST/STM32F0xx/Include>"
-    "$<$<AND:$<NOT:$<CONFIG:Debug>>,$<COMPILE_LANGUAGE:C>>:${PROJECT_SOURCE_DIR}/Drivers/CMSIS/Include>"
+#    "$<$<AND:$<NOT:$<CONFIG:Debug>>,$<COMPILE_LANGUAGE:C>>:${PROJECT_SOURCE_DIR}/Drivers/CMSIS/Device/ST/STM32F0xx/Include>"
+#    "$<$<AND:$<NOT:$<CONFIG:Debug>>,$<COMPILE_LANGUAGE:C>>:${PROJECT_SOURCE_DIR}/Drivers/CMSIS/Include>"
 )
 
 target_compile_options(
@@ -47,6 +48,7 @@ target_compile_options(
 
 target_link_libraries(
     ${TARGET_NAME} PRIVATE
+
 )
 
 target_link_directories(
@@ -70,7 +72,8 @@ target_sources(
     "Core/Src/syscalls.c"
     "Core/Src/sysmem.c"
     "Core/Src/system_stm32f0xx.c"
-    "Core/Startup/startup_stm32f030r8tx.s"
+    #"Core/Startup/startup_stm32f030r8tx.s"
+    "__startup/__vectors.c"
     "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c"
     "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c"
     "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_exti.c"
