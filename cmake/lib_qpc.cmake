@@ -4,28 +4,28 @@ include(FetchContent)
 set(GITHUB_BRANCH_QPC "7.2.1")
 cmake_print_variables(GITHUB_BRANCH_QPC)
 
-#FetchContent_Declare(
-#    qpc                             # Recommendation: Stick close to the original name.
-#    URL https://github.com/QuantumLeaps/archive/refs/tags/${GITHUB_BRANCH_QPC}.tar.gz
-#    URL_HASH MD5=6b67968b5a3540156a4bd772d899339e
-#    #DOWNLOAD_EXTRACT_TIMESTAMP TRUE
-#)
-#
-#FetchContent_GetProperties(qpc)
-#
-#if(NOT qpc_POPULATED)
-#    FetchContent_Populate(qpc)
-#endif()
-## Extract information for QPC framework
+FetchContent_Declare(
+    qpc                             # Recommendation: Stick close to the original name.
+    URL https://github.com/QuantumLeaps/qpc/archive/refs/tags/v7.2.1.tar.gz
+    URL_HASH MD5=08a8912195287d740818ca3a9f954c99
+    #DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+
+FetchContent_GetProperties(qpc)
+
+if(NOT qpc_POPULATED)
+    FetchContent_Populate(qpc)
+endif()
+# Extract information for QPC framework
 if(CMAKE_C_COMPILER_ID STREQUAL "ARMClang")
-set(QPC_PORT_NAME "armclang" CACHE STRING "QPC port directory based on armclang compiler")
+set(QPC_COMPILER_NAME "armclang" CACHE STRING "QPC port directory based on armclang compiler")
 elseif(CMAKE_C_COMPILER_ID STREQUAL "GNU")
-set(QPC_PORT_NAME "gnu" CACHE STRING "QPC port directory based on gnu c compiler")
+set(QPC_COMPILER_NAME "gnu" CACHE STRING "QPC port directory based on gnu c compiler")
 else()
 message(FATAL_ERROR "QPC can not be integrated with this compiler...")
 endif()
-cmake_print_variables(QPC_PORT_NAME)
-if(NOT DEFINED qpf_SOURCE_DIR)
+cmake_print_variables(QPC_COMPILER_NAME)
+if(NOT DEFINED qpc_SOURCE_DIR)
 set(qpc_SOURCE_DIR ${CMAKE_SOURCE_DIR}/../qpc)
 endif()
 cmake_print_variables(qpc_SOURCE_DIR)
@@ -70,5 +70,5 @@ set(qpc_qxk_SOURCES
 )
 
 set(qpc_ports_arm-cm_qk_SOURCES
-    ${qpc_SOURCE_DIR}/ports/arm-cm/qk/${QPC_PORT_NAME}/
+    ${qpc_SOURCE_DIR}/ports/arm-cm/qk/${QPC_COMPILER_NAME}/
 )
