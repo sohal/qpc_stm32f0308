@@ -60,10 +60,6 @@ void SVC_Handler                        (void) __attribute__ ((weak, alias("Defa
 void PendSV_Handler                     (void) __attribute__ ((weak, alias("Default_Handler")));
 void SysTick_Handler                    (void) __attribute__ ((weak, alias("Default_Handler")));
 
-
-
-
-
 /* Add your device specific interrupt handler */
 /*---------------------------------------------------------------------------
   ISR
@@ -110,8 +106,8 @@ void IRQ_047                            (void) __attribute__ ((weak, alias("Defa
 #endif
 
 /* ToDo: Add Cortex exception vectors according the used Cortex-Core */
-extern const VECTOR_TABLE_Type VC[240];
-       const VECTOR_TABLE_Type VC[240] __VECTOR_TABLE_ATTRIBUTE = {
+extern const VECTOR_TABLE_Type  __VECTOR_TABLE[240];
+const VECTOR_TABLE_Type  __VECTOR_TABLE[240] __VECTOR_TABLE_ATTRIBUTE = {
     (VECTOR_TABLE_Type)(&__INITIAL_SP),  /*     Initial Stack Pointer */
     (VECTOR_TABLE_Type)&Reset_Handler,                       /*     Reset Handler */
     (VECTOR_TABLE_Type)&NMI_Handler,                         /* -14 NMI Handler */
@@ -171,25 +167,25 @@ extern const VECTOR_TABLE_Type VC[240];
  *---------------------------------------------------------------------------*/
 __NO_RETURN void Reset_Handler(void)
 {
-  __set_PSP((uint32_t)(&__INITIAL_SP));
+    __set_PSP((uint32_t)(&__INITIAL_SP));
 
 /* ToDo: Initialize stack limit register for Armv8-M Main Extension based processors*/
-  __set_MSP((uint32_t)(&__STACK_LIMIT));
-  __set_PSP((uint32_t)(&__STACK_LIMIT));
+    __set_MSP((uint32_t)(&__STACK_LIMIT));
+    __set_PSP((uint32_t)(&__STACK_LIMIT));
 
 /* ToDo: Add stack sealing for Armv8-M based processors */
 #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
-  __TZ_set_STACKSEAL_S((uint32_t *)(&__STACK_SEAL));
+    __TZ_set_STACKSEAL_S((uint32_t *)(&__STACK_SEAL));
 #endif
 
-  SystemInit();                    /* CMSIS System Initialization */
-  __PROGRAM_START();               /* Enter PreMain (C library entry point) */
+    SystemInit();                    /* CMSIS System Initialization */
+    __PROGRAM_START();               /* Enter PreMain (C library entry point) */
 }
 
 
 #if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wmissing-noreturn"
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wmissing-noreturn"
 #endif
 
 /*---------------------------------------------------------------------------
@@ -197,7 +193,7 @@ __NO_RETURN void Reset_Handler(void)
  *---------------------------------------------------------------------------*/
 void HardFault_Handler(void)
 {
-  while(1);
+    while(1);
 }
 
 /*---------------------------------------------------------------------------
@@ -205,9 +201,9 @@ void HardFault_Handler(void)
  *---------------------------------------------------------------------------*/
 void Default_Handler(void)
 {
-  while(1);
+    while(1);
 }
 
 #if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
-  #pragma clang diagnostic pop
+    #pragma clang diagnostic pop
 #endif

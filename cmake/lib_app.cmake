@@ -19,12 +19,13 @@ target_include_directories(app
     "$<$<AND:$<CONFIG:Debug>,$<COMPILE_LANGUAGE:C>>:${PROJECT_SOURCE_DIR}/Drivers/CMSIS/Device/ST/STM32F0xx/Include>"
     PUBLIC
     ${app_SOURCE_DIR}
+    $<BUILD_INTERFACE:${app_SOURCE_DIR}>
 )
 
 target_include_directories(app SYSTEM
     PUBLIC
 
-    $<BUILD_INTERFACE:${app_SOURCE_DIR}>
+    
 )
 
 target_compile_options(app

@@ -3,7 +3,7 @@ include(CMakePrintHelpers)
 set(hal_core_INCLUDES_DIR "${CMAKE_SOURCE_DIR}/Core/Inc")
 set(hal_core_SOURCE_DIR "${CMAKE_SOURCE_DIR}/Core/Src")
 set(hal_core_SOURCES
-    ${hal_core_SOURCE_DIR}/main.c
+    #${hal_core_SOURCE_DIR}/main.c
     ${hal_core_SOURCE_DIR}/stm32f0xx_hal_msp.c
     ${hal_core_SOURCE_DIR}/syscalls.c
     ${hal_core_SOURCE_DIR}/sysmem.c
@@ -44,8 +44,10 @@ target_include_directories(hal
     PUBLIC
     ${hal_core_INCLUDES_DIR}
     ${hal_drivers_INCLUDE_DIR}
+    ${hal_drivers_CMSIS_INCLUDE_DIR}
     $<BUILD_INTERFACE:${hal_core_INCLUDES_DIR}>
     $<BUILD_INTERFACE:${hal_drivers_INCLUDE_DIR}>
+    $<BUILD_INTERFACE:${hal_drivers_CMSIS_INCLUDE_DIR}>
     PRIVATE
     ${hal_drivers_legacy_INCLUDE_DIR}
     ${hal_drivers_CMSIS_INCLUDE_DIR}

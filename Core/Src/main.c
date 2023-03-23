@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "qpc_app.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -63,7 +63,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   {
     if(timCnt++ > 1)
     {
-      HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
+      HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
       timCnt = 0;
     }
   }
@@ -73,10 +73,7 @@ void hal_HAL_IncTick(void)
 {
   HAL_IncTick();
 }
-__weak int qpc_app(void)
-{
-  return 0;
-}
+
 /* USER CODE END 0 */
 
 /**
@@ -182,7 +179,7 @@ static void MX_TIM1_Init(void)
 
   /* USER CODE END TIM1_Init 1 */
   htim1.Instance = TIM1;
-  htim1.Init.Prescaler = 24000;
+  htim1.Init.Prescaler = 2400;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim1.Init.Period = 1000;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;

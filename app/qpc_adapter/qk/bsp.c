@@ -44,17 +44,11 @@ Q_DEFINE_THIS_FILE
 #ifdef Q_SPY
     #error Simple Blinky Application does not provide Spy build configuration
 #endif
-
+extern TIM_HandleTypeDef htim1;
 /* ISRs defined in this BSP ------------------------------------------------*/
 void SysTick_Handler(void);
-
+void TIM1_BRK_UP_TRG_COM_IRQHandler(void);
 /* Local-scope objects -----------------------------------------------------*/
-#define LED_RED     (1U << 1)
-#define LED_GREEN   (1U << 3)
-#define LED_BLUE    (1U << 2)
-
-#define BTN_SW1     (1U << 4)
-#define BTN_SW2     (1U << 0)
 
 /* ISRs used in this project ===============================================*/
 void SysTick_Handler(void) {
@@ -63,7 +57,12 @@ void SysTick_Handler(void) {
     hal_HAL_IncTick();
     QK_ISR_EXIT();  /* inform QK about exiting an ISR */
 }
-
+void TIM1_BRK_UP_TRG_COM_IRQHandler(void)
+{
+    QK_ISR_ENTRY();
+    HAL_TIM_IRQHandler(&htim1);
+    QK_ISR_EXIT();
+}
 /*..........................................................................*/
 void BSP_init(void) {
 
@@ -72,19 +71,20 @@ void BSP_init(void) {
     */
     SystemCoreClockUpdate();
 
+
 }
 /*..........................................................................*/
 void BSP_ledOn(void) {
     float volatile x = 3.1415926F;
     x = x + 2.7182818F;
-
+    HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, GPIO_PIN_SET);
 }
 /*..........................................................................*/
 void BSP_ledOff(void) {
    /* exercise the FPU with some floating point computations */
     float volatile x = 3.1415926F;
     x = x + 2.7182818F;
-
+    HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, GPIO_PIN_RESET);
 }
 
 /* QF callbacks ============================================================*/
@@ -102,9 +102,13 @@ void QF_onStartup(void) {
     * DO NOT LEAVE THE ISR PRIORITIES AT THE DEFAULT VALUE!
     */
     NVIC_SetPriority(SysTick_IRQn,   QF_AWARE_ISR_CMSIS_PRI);
+    NVIC_SetPriority(TIM1_BRK_UP_TRG_COM_IRQn, QF_AWARE_ISR_CMSIS_PRI + 1);
     /* ... */
 
     /* enable IRQs... */
+
+    /* Initialize the hardware intetrupts here */
+    NVIC_EnableIRQ(TIM1_BRK_UP_TRG_COM_IRQn);
 }
 /*..........................................................................*/
 void QF_onCleanup(void) {

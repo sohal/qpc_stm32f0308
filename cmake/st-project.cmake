@@ -57,6 +57,7 @@ target_link_directories(
 
 target_link_options(
     ${TARGET_NAME} PRIVATE
+    --specs=nosys.specs
     "$<$<CONFIG:Debug>:-mcpu=cortex-m0>"
     "$<$<NOT:$<CONFIG:Debug>>:-mcpu=cortex-m0>"
     -T
@@ -66,30 +67,30 @@ target_link_options(
 
 target_sources(
     ${TARGET_NAME} PRIVATE
-    "Core/Src/main.c"
-    "Core/Src/stm32f0xx_hal_msp.c"
+    #"Core/Src/main.c"
+    #"Core/Src/stm32f0xx_hal_msp.c"
 
     #"Core/Src/stm32f0xx_it.c"  Exclude all naked interrupt vectors... qpc will take over
-    "Core/Src/syscalls.c"
-    "Core/Src/sysmem.c"
-    "Core/Src/system_stm32f0xx.c"
+   # "Core/Src/syscalls.c"
+    #"Core/Src/sysmem.c"
+    #"Core/Src/system_stm32f0xx.c"
     #"Core/Startup/startup_stm32f030r8tx.s"
     "__startup/__vectors.c"
-    "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c"
-    "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c"
-    "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_exti.c"
-    "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.c"
-    "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.c"
-    "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c"
-    "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c"
-    "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.c"
-    "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr_ex.c"
-    "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.c"
-    "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.c"
-    "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c"
-    "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.c"
-    "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.c"
-    "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c"
+    #"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c"
+    #"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c"
+    #"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_exti.c"
+    #"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.c"
+    #"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.c"
+    #"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c"
+    #"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c"
+    #"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.c"
+    #"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr_ex.c"
+    #"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.c"
+    #"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.c"
+    #"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c"
+    #"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.c"
+    #"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.c"
+    #"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c"
 )
 
 add_custom_command(
@@ -108,5 +109,4 @@ add_custom_command(
     COMMAND ${CMAKE_OBJCOPY} -O binary
     $<TARGET_FILE:${TARGET_NAME}> ${TARGET_NAME}.bin
 )
-
 endfunction()
