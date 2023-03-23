@@ -6,7 +6,8 @@ cmake_print_variables(GITHUB_BRANCH_QPC)
 
 FetchContent_Declare(
     qpc                             # Recommendation: Stick close to the original name.
-    URL https://github.com/QuantumLeaps/qpc/archive/refs/tags/v7.2.1.tar.gz
+    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+    URL https://github.com/QuantumLeaps/qpc/archive/refs/tags/v${GITHUB_BRANCH_QPC}.tar.gz
     URL_HASH MD5=08a8912195287d740818ca3a9f954c99
 )
 
