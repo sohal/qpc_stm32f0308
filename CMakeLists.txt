@@ -2,8 +2,10 @@ cmake_minimum_required(VERSION 3.20)
 
 project("stm32f0308_disco" C CXX ASM)
 
-include(cmake/st-project.cmake)
+#include(cmake/st-project.cmake)
 include(cmake/lib_cmsis.cmake)
 include(cmake/lib_qpc.cmake)
-add_executable(${PROJECT_NAME})
-add_st_target_properties(${PROJECT_NAME})
+include(cmake/lib_app.cmake)
+include(cmake/lib_hal.cmake)
+#add_executable(${PROJECT_NAME})
+#add_st_target_properties(${PROJECT_NAME})

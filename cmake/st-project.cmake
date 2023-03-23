@@ -48,7 +48,7 @@ target_compile_options(
 
 target_link_libraries(
     ${TARGET_NAME} PRIVATE
-
+    app
 )
 
 target_link_directories(
@@ -68,7 +68,8 @@ target_sources(
     ${TARGET_NAME} PRIVATE
     "Core/Src/main.c"
     "Core/Src/stm32f0xx_hal_msp.c"
-    "Core/Src/stm32f0xx_it.c"
+
+    #"Core/Src/stm32f0xx_it.c"  Exclude all naked interrupt vectors... qpc will take over
     "Core/Src/syscalls.c"
     "Core/Src/sysmem.c"
     "Core/Src/system_stm32f0xx.c"

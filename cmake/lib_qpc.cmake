@@ -8,7 +8,6 @@ FetchContent_Declare(
     qpc                             # Recommendation: Stick close to the original name.
     URL https://github.com/QuantumLeaps/qpc/archive/refs/tags/v7.2.1.tar.gz
     URL_HASH MD5=08a8912195287d740818ca3a9f954c99
-    #DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 
 FetchContent_GetProperties(qpc)
@@ -84,9 +83,16 @@ target_sources(qpc
 )
 
 target_include_directories(qpc
+
     PRIVATE
-    ${qpc_SOURCE_DIR}/include
     ${qpc_ports_qk_PATH}
+)
+
+target_include_directories(qpc SYSTEM
+    PUBLIC
+
+    $<BUILD_INTERFACE:${qpc_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${qpc_SOURCE_DIR}/ports/arm-cm/qk/gnu>
 )
 
 target_compile_options(qpc

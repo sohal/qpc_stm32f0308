@@ -68,6 +68,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     }
   }
 }
+
+void hal_HAL_IncTick(void)
+{
+  HAL_IncTick();
+}
+__weak int qpc_app(void)
+{
+  return 0;
+}
 /* USER CODE END 0 */
 
 /**
@@ -100,6 +109,7 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
+  (void)qpc_app();
   HAL_TIM_Base_Start_IT(&htim1);
   /* USER CODE END 2 */
 

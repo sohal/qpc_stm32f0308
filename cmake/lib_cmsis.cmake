@@ -9,7 +9,6 @@ FetchContent_Declare(
     cmsis                             # Recommendation: Stick close to the original name.
     URL https://github.com/ARM-software/CMSIS_5/archive/refs/tags/${GITHUB_BRANCH_CMSIS}.tar.gz
     URL_HASH MD5=6b67968b5a3540156a4bd772d899339e
-    #DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 
 FetchContent_GetProperties(cmsis)
