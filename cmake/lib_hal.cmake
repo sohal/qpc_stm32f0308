@@ -62,15 +62,5 @@ target_compile_definitions(hal
     USE_HAL_DRIVER
     STM32F030x8
 )
-
-target_compile_options(hal
-    PRIVATE
-    -mcpu=cortex-m0 #ARM_CPU (cortex-m0, cortex-m1...)
-                    #ARM_FPU (vfp)
-                    #FLOAT_ABI (soft|softfp|hard)
-    -mthumb
-    -Wall
-    -ffunction-sections
-    -fdata-sections
-    -O2
-)
+set(libName hal)
+setTargetCompileOptions(libName)

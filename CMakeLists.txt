@@ -5,7 +5,6 @@ include(FetchContent)
 # Set branch names for the sub modules dependencies
 set(GITHUB_BRANCH_TOOLCHAIN "HEAD" CACHE STRING "git SHA for CMake Toolchain")
 # set the location of all fetched repos
-#set(FETCHCONTENT_BASE_DIR "${CMAKE_SOURCE_DIR}/_deps")
 
 # show limited messages while cloning git repos
 set(FETCHCONTENT_QUIET ON)
@@ -26,11 +25,8 @@ endif()
 
 project("stm32f0308_disco" C CXX ASM)
 
-#include(cmake/st-project.cmake)
 include(cmake/lib_cmsis.cmake)
 include(cmake/lib_qpc.cmake)
 include(cmake/lib_app.cmake)
 include(cmake/lib_hal.cmake)
 include(cmake/qpc_app.cmake)
-#add_executable(${PROJECT_NAME})
-#add_st_target_properties(${PROJECT_NAME})

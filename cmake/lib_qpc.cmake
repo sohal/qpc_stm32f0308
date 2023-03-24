@@ -18,16 +18,29 @@ if(NOT qpc_POPULATED)
 endif()
 # Extract information for QPC framework
 if(CMAKE_C_COMPILER_ID STREQUAL "ARMClang")
-set(QPC_COMPILER_NAME "armclang" CACHE STRING "QPC port directory based on armclang compiler")
+    set(QPC_COMPILER_NAME "armclang" CACHE STRING "QPC port directory based on armclang compiler")
 elseif(CMAKE_C_COMPILER_ID STREQUAL "GNU")
-set(QPC_COMPILER_NAME "gnu" CACHE STRING "QPC port directory based on gnu c compiler")
+    set(QPC_COMPILER_NAME "gnu" CACHE STRING "QPC port directory based on gnu c compiler")
 else()
-message(FATAL_ERROR "QPC can not be integrated with this compiler...")
+    message(FATAL_ERROR "QPC can not be integrated with this compiler...")
 endif()
+
+if(QPC_TYPE STREQUAL "QK")
+    message(STATUS "${QPC_TYPE} is for QK type work")
+elseif(QPC_TYPE STREQUAL "QV")
+    message(STATUS "${QPC_TYPE} is for QV type work")
+elseif (QPC_TYPE STREQUAL "QXK")
+    message(STATUS "${QPC_TYPE} is for QXK type work")
+else()
+    set(QPC_TYPE "QK")
+    message(STATUS "${QPC_TYPE} is for QK type work")
+endif()
+
 cmake_print_variables(QPC_COMPILER_NAME)
 if(NOT DEFINED qpc_SOURCE_DIR)
 message(FATAL_ERROR "QPC Framework not downloaded.")
 endif()
+
 cmake_print_variables(qpc_SOURCE_DIR)
 
 set(qpc_qf_SOURCES
@@ -96,14 +109,6 @@ target_include_directories(qpc SYSTEM
     $<BUILD_INTERFACE:${qpc_SOURCE_DIR}/ports/arm-cm/qk/gnu>
 )
 
-target_compile_options(qpc
-    PRIVATE
-    -mcpu=cortex-m0 #ARM_CPU (cortex-m0, cortex-m1...)
-                    #ARM_FPU (vfp)
-                    #FLOAT_ABI (soft|softfp|hard)
-    -mthumb
-    -Wall
-    -ffunction-sections
-    -fdata-sections
-    -O2
-)
+# Add target compile options based on toolchain
+set(libName qpc)
+setTargetCompileOptions(libName)

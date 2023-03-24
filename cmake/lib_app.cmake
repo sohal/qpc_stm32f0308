@@ -22,23 +22,8 @@ target_include_directories(app
     $<BUILD_INTERFACE:${app_SOURCE_DIR}>
 )
 
-target_include_directories(app SYSTEM
-    PUBLIC
-
-    
-)
-
-target_compile_options(app
-    PRIVATE
-    -mcpu=cortex-m0 #ARM_CPU (cortex-m0, cortex-m1...)
-                    #ARM_FPU (vfp)
-                    #FLOAT_ABI (soft|softfp|hard)
-    -mthumb
-    -Wall
-    -ffunction-sections
-    -fdata-sections
-    -O2
-)
+set(libName app)
+setTargetCompileOptions(libName)
 
 target_link_libraries(app
     hal
