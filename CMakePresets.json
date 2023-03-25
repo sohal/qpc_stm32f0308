@@ -7,29 +7,11 @@
   },
   "configurePresets": [
       {
-          "name": "xblinky",
-          "displayName": "xblinky",
-          "description": "xBlinky CM0",
-          "generator": "Ninja",
-          "environment": {
-              "ARM_GCC_ROOT_FOLDER": "/Applications/ARM"
-          },
-          "binaryDir": "${sourceDir}/build/${presetName}",
-          "cacheVariables": {
-              "FETCHCONTENT_UPDATES_DISCONNECTED": "OFF",
-              "CMAKE_BUILD_TYPE": "Debug",
-              "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}",
-              "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/build/${presetName}/_deps/platform_cmake-src/armgcc-cortex-m0.cmake",
-              "GITHUB_BRANCH_TOOLCHAIN": "PLAT-1071"
-          }
-      },
-      {
-        "name": "blinky",
-        "displayName": "blinky",
-        "description": "Blinky CM0",
+        "name": "QPC_CM0_GCC_Demo",
+        "displayName": "QPC_CM0_GCC_Demo",
+        "description": "Blinky STM32F03080 Discovery board demo",
         "generator": "Ninja",
         "environment": {
-            "ARM_GCC_ROOT_FOLDER": "/Applications/ARM",
             "CORTEX_TYPE": "cm0"
         },
         "binaryDir": "${sourceDir}/build/${presetName}",
@@ -44,8 +26,8 @@
   ],
   "buildPresets": [
       {
-          "name": "blinky",
-          "configurePreset": "blinky"
+          "name": "QPC_CM0_GCC_Demo",
+          "configurePreset": "QPC_CM0_GCC_Demo"
       }
   ]
 }
