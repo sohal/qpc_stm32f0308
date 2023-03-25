@@ -22,4 +22,5 @@ set(${targetName}_LINKER_PATH "${CMAKE_SOURCE_DIR}/__linker")
 set(${targetName}_LINKER_SCRIPT "gcc_arm.ld")
 setTargetCompileOptions(targetName)
 setTargetLinkOptions(targetName)
+
 convertELF_BIN_HEX (${targetName})
