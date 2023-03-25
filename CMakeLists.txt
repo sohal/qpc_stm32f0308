@@ -30,5 +30,5 @@ include(cmake/lib_cmsis.cmake)
 include(cmake/lib_qpc.cmake)
 include(cmake/lib_app.cmake)
 include(cmake/lib_hal.cmake)
-include(cmake/qpc_app.cmake)
+#include(cmake/qpc_app.cmake)
 
