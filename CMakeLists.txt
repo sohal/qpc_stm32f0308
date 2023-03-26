@@ -6,7 +6,7 @@ set(CORTEX_TYPE "cm0")
 # Set branch names for the sub modules dependencies
 set(GITHUB_BRANCH_TOOLCHAIN "HEAD" CACHE STRING "git SHA for CMake Toolchain")
 # set the location of all fetched repos
-
+set(FETCHCONTENT_BASE_DIR "${CMAKE_SOURCE_DIR}/_deps")
 # show limited messages while cloning git repos
 set(FETCHCONTENT_QUIET ON)
 
