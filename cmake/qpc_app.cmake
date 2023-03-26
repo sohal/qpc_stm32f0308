@@ -20,6 +20,8 @@ set(targetName blinky)
 
 set(${targetName}_LINKER_PATH "${CMAKE_SOURCE_DIR}/__linker")
 set(${targetName}_LINKER_SCRIPT "gcc_arm.ld")
+set(${targetName}_SCATTER_PATH "${CMAKE_SOURCE_DIR}/__linker")
+set(${targetName}_SCATTER_FILE "ac6_arm.sct")
 setTargetCompileOptions(targetName)
 setTargetLinkOptions(targetName)
 

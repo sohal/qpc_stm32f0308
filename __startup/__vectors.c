@@ -1,7 +1,18 @@
 #include <stdint.h>
-#include "cmsis_compiler.h"
 #include "stm32f030x8.h"
 #include "system_ARMCM0.h"
+#if defined (__ARMCC_VERSION) && (__ARMCC_VERSION >= 6100100)
+    #ifdef __INITIAL_SP
+        #undef __INITIAL_SP
+        #define __INITIAL_SP              Image$$ARM_LIB_STACKHEAP$$ZI$$Limit
+    #endif
+
+    #ifdef __STACK_LIMIT
+        #undef __STACK_LIMIT
+        #define __STACK_LIMIT             Image$$ARM_LIB_STACKHEAP$$ZI$$Base
+    #endif
+#endif
+#include "cmsis_compiler.h"
 /******************************************************************************
  * @file     startup_<Device>.c
  * @brief    CMSIS-Core(M) Device Startup File for
@@ -32,6 +43,7 @@
  *---------------------------------------------------------------------------*/
 extern uint32_t __INITIAL_SP;
 extern uint32_t __STACK_LIMIT;
+
 #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
 extern uint32_t __STACK_SEAL;
 #endif
