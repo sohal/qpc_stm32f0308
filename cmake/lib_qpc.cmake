@@ -17,7 +17,7 @@ if(NOT qpc_POPULATED)
     FetchContent_Populate(qpc)
 endif()
 # Extract information for QPC framework
-if(CMAKE_C_COMPILER_ID STREQUAL "ARMClang")
+if(CMAKE_C_COMPILER_ID STREQUAL "ARMClang" OR CMAKE_C_COMPILER_ID STREQUAL "Clang")
     set(QPC_COMPILER_NAME "armclang" CACHE STRING "QPC port directory based on armclang compiler")
 elseif(CMAKE_C_COMPILER_ID STREQUAL "GNU")
     set(QPC_COMPILER_NAME "gnu" CACHE STRING "QPC port directory based on gnu c compiler")
