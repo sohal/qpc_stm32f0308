@@ -12,7 +12,11 @@
         #define __STACK_LIMIT             Image$$ARM_LIB_STACKHEAP$$ZI$$Base
     #endif
 #endif
+#if defined (__clang__)
+    #include "__vectors_llvm.h"
+#endif
 #include "cmsis_compiler.h"
+
 /******************************************************************************
  * @file     startup_<Device>.c
  * @brief    CMSIS-Core(M) Device Startup File for
