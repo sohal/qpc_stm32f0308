@@ -38,7 +38,7 @@ __ram = 0x20000000;     /* starting address of RAM bank 0 */
 __ram_size = 0x2000;    /* length of RAM bank 0 */
 __stack_size = 0x400;
 
-ENTRY(_start)
+ENTRY(Reset_Handler)
 
 /*
  * These values should be provided by the application. We'll include
