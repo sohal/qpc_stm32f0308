@@ -3,17 +3,15 @@ add_executable(blinky)
 target_sources(blinky
     PRIVATE
     ${CMAKE_SOURCE_DIR}/__startup/__vectors.c
-    ./Core/Src/main.c
 )
 
 target_link_libraries(blinky
     app
 )
-
+message(STATUS ${CMSISCORE})
 target_include_directories(blinky
-    PRIVATE
-    "$<$<AND:$<CONFIG:Debug>,$<COMPILE_LANGUAGE:C>>:${cmsis_SOURCE_DIR}/Device/ARM/ARMCM0/Include>"
-    "$<$<AND:$<CONFIG:Debug>,$<COMPILE_LANGUAGE:C>>:${cmsis_SOURCE_DIR}/CMSIS/Core/Include>"
+    PUBLIC
+    ${cmsis_DEVICE_INCLUDE_DIR}
 )
 
 set(targetName blinky)

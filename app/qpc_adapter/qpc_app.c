@@ -34,12 +34,12 @@
 #include "qpc.h"
 #include "blinky.h"
 #include "bsp.h"
-
 Q_DEFINE_THIS_FILE
 
 /*..........................................................................*/
-int qpc_app(void) {
+static int qf_main(void) {
     QF_init();  /* initialize the framework and the underlying RT kernel */
+
     BSP_init(); /* initialize the Board Support Package */
 
     /* publish-subscribe not used, no call to QF_psInit() */
@@ -57,4 +57,8 @@ int qpc_app(void) {
                   (QEvt *)0);     /* initial event (or 0) */
 
     return QF_run(); /* run the QF application */
+}
+
+void app_main (void){
+    (void)qf_main();
 }

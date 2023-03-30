@@ -37,6 +37,7 @@
 
 #include "stm32f030x8.h"
 #include "main.h"
+#include "stm32f0xx_hal.h"
 /* add other drivers if necessary... */
 
 Q_DEFINE_THIS_FILE
@@ -45,6 +46,7 @@ Q_DEFINE_THIS_FILE
     #error Simple Blinky Application does not provide Spy build configuration
 #endif
 extern TIM_HandleTypeDef htim1;
+static volatile uint32_t tVar;
 /* ISRs defined in this BSP ------------------------------------------------*/
 void SysTick_Handler(void);
 void TIM1_BRK_UP_TRG_COM_IRQHandler(void);
@@ -54,15 +56,21 @@ void TIM1_BRK_UP_TRG_COM_IRQHandler(void);
 void SysTick_Handler(void) {
     QK_ISR_ENTRY();   /* inform QK about entering an ISR */
     QTIMEEVT_TICK_X(0U, (void *)0); /* process time events for rate 0 */
-    hal_HAL_IncTick();
     QK_ISR_EXIT();  /* inform QK about exiting an ISR */
 }
 void TIM1_BRK_UP_TRG_COM_IRQHandler(void)
 {
-    QK_ISR_ENTRY();
+    QK_ISR_ENTRY();   /* inform QK about entering an ISR */
     HAL_TIM_IRQHandler(&htim1);
-    QK_ISR_EXIT();
+    if(tVar > 200)
+    {
+        tVar = 0;
+        HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+    }
+    tVar++;
+    QK_ISR_EXIT();  /* inform QK about exiting an ISR */    
 }
+
 /*..........................................................................*/
 void BSP_init(void) {
 
@@ -70,8 +78,7 @@ void BSP_init(void) {
     *  but SystemCoreClock needs to be updated
     */
     SystemCoreClockUpdate();
-
-
+    HAL_SetTickFreq(HAL_TICK_FREQ_1KHZ);
 }
 /*..........................................................................*/
 void BSP_ledOn(void) {

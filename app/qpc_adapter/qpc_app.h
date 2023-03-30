@@ -1,4 +1,4 @@
 #ifndef QPC_APP_H
 #define QPC_APP_H
-int qpc_app(void);
+void app_main(void);
 #endif//QPC_APP_H
