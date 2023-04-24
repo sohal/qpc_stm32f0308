@@ -27,6 +27,6 @@ endif()
 project("stm32f0308_disco" C CXX ASM)
 
 include(cmake/lib_app.cmake)
-include(cmake/lib_hal.cmake)
+include(cmake/cubemx_hal.cmake)
 include(cmake/qpc_app.cmake)
 

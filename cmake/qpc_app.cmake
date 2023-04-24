@@ -8,7 +8,7 @@ target_sources(blinky
 target_link_libraries(blinky
     app
 )
-message(STATUS ${CMSISCORE})
+
 target_include_directories(blinky
     PUBLIC
     ${cmsis_DEVICE_INCLUDE_DIR}
