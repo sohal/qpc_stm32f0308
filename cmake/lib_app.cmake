@@ -1,3 +1,6 @@
+# include the qpc framework here
+include(${cmake-toolchains_SOURCE_DIR}/frameworks/lib_QPC.cmake)
+
 set(app_SOURCE_DIR ${CMAKE_SOURCE_DIR}/app/qpc_adapter)
 set(app_SOURCES
     ${app_SOURCE_DIR}/qpc_app.c
@@ -8,7 +11,7 @@ set(app_SOURCES
 add_library(app STATIC)
 
 target_sources(app
-    PRIVATE
+    PUBLIC
     ${app_SOURCES}
 )
 
